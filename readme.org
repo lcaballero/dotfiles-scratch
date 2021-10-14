@@ -1,0 +1,15 @@
+* Purpose
+  Code to explore: temp.
+
+* Initial Setup
+  The default commit is based on 'new-take' script.
+  - ./
+    - .git/
+    - .gitignore
+    - .dir-locals.el
+    - .editorconfig
+    - .out/ (ignored in .gitignore)
+    - .temp/ (ignored in .gitignore)
+    - readme.org (this file)
+    - run.sh (made executable)
+
