@@ -32,6 +32,10 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
+(global-unset-key (kbd "M-i"))
+(global-unset-key (kbd "M-l"))
+(global-unset-key (kbd "M-u"))
+
 ;; when not in a windowing system turn off some of the UI
 (if (not window-system)
     (progn
@@ -103,19 +107,41 @@
   :bind
   (("C-c b m" . bm-toggle)
    ("C-c b n" . bm-next)
-   ("C-c b p" . bm-previous)))
+   ("C-c b p" . bm-previous)
+   ("M-m" . bm-toggle)
+   ("M-l" . bm-next)
+   ("M-h" . bm-previous)
+   ("<f10>" . bm-toggle)
+   ("<f12>" . bm-next)
+   ("<f11>" . bm.previous)))
 
 (use-package ws-butler
-  :diminish
   :hook ((text-mode . ws-butler-mode)
          (prog-mode . ws-butler-mode)))
 
-(use-package neotree)
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 (use-package paredit
   :diminish
   :hook ((lisp-mode emacs-lisp-mode) . paredit-mode))
+
+(use-package neotree
+  :init
+  (load "~/.emacs.d/my-neotree.el")
+  :bind
+  ("M-1" . neotree)
+  (:map neotree-mode-map
+	("M-1" . neotree-hide)
+	("l" . widen-neo-window)
+	("h" . shrink-neo-window)
+	("j" . neotree-next-line)
+	("k" . neotree-previous-line)
+	("m" . neotree-quick-look)
+	("u" . neotree-select-up-node)
+	("d" . neotree-select-down-node)
+	("o" . other-window)))
+
+
 
 (defun sh-key ()
   (interactive)
